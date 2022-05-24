@@ -98,5 +98,49 @@ def finish_up_all_task():
         except:
             pass
 
-get_daily_six_task()
-finish_up_all_task()
+
+def is_english_keybord():
+    return find("ui/english_keybord.png")
+
+
+def relogin(username, password):
+    steps = ["../side_menu.png", "config.png", "back_to_login.png", "close_update_message.png", "account_manage.png", "swich_account.png", "confirm.png", "email_address.png", "next_step.png", "password.png", "next_step.png", "login.png", "start_into_server.png", "start_into_game.png"]
+
+    def wait_images_display():
+        sleep(1)
+
+    for step in steps:
+        def execute_this_step():
+            wait_and_click("ui/login/" + step)
+
+            if step == "start_into_server.png":
+                #todo: get image
+                if find("ui/login/login_error_message.png"):
+                    #todo: get image
+                    wait_and_click("ui/login/login_error_confirm.png")
+                    raise
+
+        try_execute(3, execute_this_step, wait_images_display)
+
+
+        if step == "email_address.png":
+            if is_english_keybord():
+                wait_and_click("ui/login/switch_language.png")
+
+            type(username)
+
+        if step == "password.png":
+            if is_english_keybord():
+                wait_and_click("ui/login/switch_language.png")
+
+            type(password)
+
+
+usernames = []
+passwords = []
+
+for u, p in zip(usernames, passwords):
+    get_daily_six_task()
+    finish_up_all_task()
+
+    relogin(u, p)
