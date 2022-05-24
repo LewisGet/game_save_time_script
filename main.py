@@ -1,5 +1,5 @@
 def wait_and_click(image):
-    wait(image)
+    wait(image, 5)
     click(image)
 
 def try_execute(try_times, execute_function, fail_execute_function):
@@ -103,36 +103,60 @@ def is_english_keybord():
     return find("ui/english_keybord.png")
 
 
+def switch_to_english_keyboard():
+    sleep(1)
+    try:
+        is_english_keybord()
+        sleep(1)
+    except:
+        wait_and_click("ui/login/switch_language.png")
+
+
 def relogin(username, password):
-    steps = ["../side_menu.png", "config.png", "back_to_login.png", "close_update_message.png", "account_manage.png", "swich_account.png", "confirm.png", "email_address.png", "next_step.png", "password.png", "next_step.png", "login.png", "start_into_server.png", "start_into_game.png"]
+    steps = ["side_menu.png", "config.png", "back_to_login.png", "close_update_message.png", "account_manage.png", "swich_account.png", "confirm.png", "email_address.png", "next_step.png", "password.png", "type_done.png", "login.png", "close_2.png", "start_into_server.png", "start_into_game.png", "close_2.png"]
 
     def wait_images_display():
         sleep(1)
 
     for step in steps:
+        sleep(1)
         def execute_this_step():
-            wait_and_click("ui/login/" + step)
+            path = "ui/login/" + step
+
+            if "side_menu.png" == step or "close.png" == step or "close_2.png" == step:
+                path = "ui/" + step
+
+            if "config.png" == step:
+                sleep(1)
+
+            if "close_update_message.png" == step:
+                sleep(30)
+
+            wait_and_click(path)
+
+            print("click execute")
 
             if step == "start_into_server.png":
+                sleep(15)
                 #todo: get image
-                if find("ui/login/login_error_message.png"):
-                    #todo: get image
+                try:
+                    find("ui/login/login_error_message.png")
                     wait_and_click("ui/login/login_error_confirm.png")
-                    raise
+                except:
+                    pass
 
-        try_execute(3, execute_this_step, wait_images_display)
+            if step == "start_into_game.png":
+                sleep(60)
+
+        try_execute(5, execute_this_step, wait_images_display)
 
 
         if step == "email_address.png":
-            if is_english_keybord():
-                wait_and_click("ui/login/switch_language.png")
-
+            switch_to_english_keyboard()
             type(username)
 
         if step == "password.png":
-            if is_english_keybord():
-                wait_and_click("ui/login/switch_language.png")
-
+            switch_to_english_keyboard()
             type(password)
 
 
