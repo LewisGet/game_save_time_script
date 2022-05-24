@@ -85,17 +85,18 @@ def start_task():
     wait_and_click("ui/daily_six/accepted.png")
     wait_and_click("ui/daily_six/doit.png")
 
+
 def finish_up_all_task():
     for i in range(50):
-    start_task()
-    sleep(60)
+        start_task()
+        sleep(60)
 
-    try:
-        find("ui/daily_six/done.png")
-        wait_and_click("ui/close.png")
-        break
-    except:
-        pass
+        try:
+            find("ui/daily_six/done.png")
+            wait_and_click("ui/close.png")
+            break
+        except:
+            pass
 
 get_daily_six_task()
 finish_up_all_task()
