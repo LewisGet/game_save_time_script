@@ -92,6 +92,7 @@ def finish_up_all_task():
         sleep(60)
 
         try:
+            wait("ui/daily_six/done.png", 5)
             find("ui/daily_six/done.png")
             wait_and_click("ui/close.png")
             break
