@@ -113,7 +113,7 @@ def switch_to_english_keyboard():
 
 
 def relogin(username, password):
-    steps = ["side_menu.png", "config.png", "back_to_login.png", "close_update_message.png", "account_manage.png", "swich_account.png", "confirm.png", "email_address.png", "next_step.png", "password.png", "type_done.png", "login.png", "close_2.png", "start_into_server.png", "start_into_game.png", "close_2.png"]
+    steps = ["side_menu.png", "config.png", "back_to_login.png", "close_update_message.png", "account_manage.png", "swich_account.png", "confirm.png", "email_address.png", "next_step.png", "password.png", "type_done.png", "login.png", "close_2.png", "start_into_server.png", "start_into_game.png", "close_2.png", "close_3.png", "close_2.png", "close_3.png"]
 
     def wait_images_display():
         sleep(1)
@@ -123,7 +123,7 @@ def relogin(username, password):
         def execute_this_step():
             path = "ui/login/" + step
 
-            if "side_menu.png" == step or "close.png" == step or "close_2.png" == step:
+            if "side_menu.png" == step or "close.png" == step or "close_2.png" == step or "close_3.png" == step:
                 path = "ui/" + step
 
             if "config.png" == step:
